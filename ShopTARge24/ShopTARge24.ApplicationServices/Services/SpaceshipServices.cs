@@ -12,9 +12,9 @@ namespace ShopTARge24.ApplicationServices.Services
         private readonly ShopTARge24Context _context;
 
         public SpaceshipServices
-            (
-                ShopTARge24Context context
-            )
+        (
+            ShopTARge24Context context
+        )
         {
             _context = context;
         }
@@ -45,5 +45,20 @@ namespace ShopTARge24.ApplicationServices.Services
 
             return result;
         }
+
+        public async Task<Spaceships> Delete(Guid id)
+        {
+            //leida ülesse konkreetne soovitud rida, mida soovite kustutada
+            var result = await _context.Spaceships
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+
+            //kui rida on leitud, siis eemaldage andmebaasist
+            _context.Spaceships.Remove(result);
+            await _context.SaveChangesAsync();
+
+            return result;
+        }
+        
     }
 }

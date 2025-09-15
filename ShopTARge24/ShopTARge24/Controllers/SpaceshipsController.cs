@@ -1,3 +1,4 @@
+﻿
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARge24.Core.Dto;
 using ShopTARge24.Core.ServiceInterface;
@@ -94,6 +95,20 @@ namespace ShopTARge24.Controllers
             vm.ModifiedAt = spaceship.ModifiedAt;
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var spaceship = await _spaceshipServices.Delete(id);
+
+            if (spaceship == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
