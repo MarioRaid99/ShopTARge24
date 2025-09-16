@@ -1,5 +1,6 @@
 ﻿
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShopTARge24.Core.Domain;
 using ShopTARge24.Core.Dto;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Data;
@@ -44,7 +45,7 @@ namespace ShopTARge24.Controllers
         {
             SpaceshipCreateUpdateViewModel result = new();
 
-            return View("Create", result);
+            return View("CreateUpdate", result);
         }
 
 
@@ -97,6 +98,31 @@ namespace ShopTARge24.Controllers
             return View("CreateUpdate", vm);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Update(SpaceshipCreateUpdateViewModel vm)
+        {
+            var dto = new SpaceshipDto()
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Classification = vm.Classification,
+                BuiltDate = vm.BuiltDate,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt
+            };
+
+            var result = await _spaceshipServices.Update(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -133,6 +159,32 @@ namespace ShopTARge24.Controllers
 
 
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            //kasutada service classi meetodit, et info k'tte saada
+            var spaceship = await _spaceshipServices.DetailAsync(id);
+
+            if(spaceship == null)
+            {
+                return NotFound();
+            }
+
+            //toimub viewModeliga mappimine
+            var vm = new SpaceshipDetailsViewModel();
+
+            vm.Id = spaceship.Id;
+            vm.Name = spaceship.Name;
+            vm.Classification = spaceship.Classification;
+            vm.BuiltDate = spaceship.BuiltDate;
+            vm.Crew = spaceship.Crew;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.CreatedAt = spaceship.CreatedAt;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+
+            return View(vm);
         }
     }
 }
