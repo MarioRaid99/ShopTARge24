@@ -11,5 +11,7 @@ namespace ShopTARge24.Data
             : base(options) { }
 
         public DbSet<Spaceships> Spaceships { get; set; }
+
+        public DbSet<Kindergarten> Kindergartens { get; set; }
     }
 }
