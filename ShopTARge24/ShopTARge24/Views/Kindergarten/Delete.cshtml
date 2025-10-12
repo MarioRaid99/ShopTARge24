@@ -1,4 +1,4 @@
-@model ShopTARge24.Models.Kindergarten.KindergartenDeleteViewModel
+@model ShopTARge24.Models.Kindergartens.KindergartenDeleteViewModel
 
 <h1>Delete</h1>
 
@@ -53,6 +53,11 @@
             @Html.DisplayFor(model => model.UpdatedAt)
         </div>
     </dl>
+
+    @foreach (var images in Model.Images)
+    {
+        <partial name="_Images" model="images" />
+    }
 
     <hr />
     <form asp-action="DeleteConfirmation">

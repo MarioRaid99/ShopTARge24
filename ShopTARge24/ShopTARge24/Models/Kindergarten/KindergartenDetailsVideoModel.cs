@@ -1,4 +1,4 @@
-namespace ShopTARge24.Models.Kindergarten
+namespace ShopTARge24.Models.Kindergartens
 {
     public class KindergartenDetailsViewModel
     {
@@ -7,6 +7,8 @@ namespace ShopTARge24.Models.Kindergarten
         public string? GroupName { get; set; }
         public string? TeacherName { get; set; }
         public int? ChildCount { get; set; }
+        public List<KindergartenImageViewModel> Images { get; set; }
+    = new List<KindergartenImageViewModel>();
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
