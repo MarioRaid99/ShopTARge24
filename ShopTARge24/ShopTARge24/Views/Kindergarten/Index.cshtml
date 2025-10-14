@@ -5,41 +5,46 @@
 }
 
 <div>
-    <a asp-action="create" asp-controller="Kindergarten" type="submit" class="btn btn-primary">Create</a>
+    <a asp-action="Create" asp-controller="Kindergarten" class="btn btn-primary">Create</a>
 </div>
 
 <div class="h1">
     Kindergartens
 </div>
+
 <form method="get">
     <table class="table table-hover">
         <thead>
-        <tr>
-            <th scope="col">Nr</th>
-            <th scope="col">Kindergarten Name</th>
-            <th scope="col">Group Name</th>
-            <th scope="col">Child Count</th>
-            <th scope="col">Created at</th>
-            <th scope="col"></th>
-        </tr>
+            <tr>
+                <th scope="col">Nr</th>
+                <th scope="col">Group Name</th>
+                <th scope="col">Children Count</th>
+                <th scope="col">Kindergarten Name</th>
+                <th scope="col">Teacher Name</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Updated At</th>
+                <th scope="col"></th>
+            </tr>
         </thead>
         <tbody>
-        @foreach (var Kindergarten in Model)
-        {
-            <tr>
-                <td>@rowNumber</td>
-                <td>@Kindergarten.KindergartenName</td>
-                <td>@Kindergarten.GroupName</td>
-                <td>@Kindergarten.ChildCount</td>
-                <td>@Kindergarten.CreatedAt</td>
-                <td>
-                    <a asp-action="details" asp-controller="Kindergarten" asp-route-id="@Kindergarten.Id" class="btn btn-primary">Details</a>
-                    <a asp-action="update" asp-controller="Kindergarten" asp-route-id="@Kindergarten.Id" class="btn btn-primary">Update</a>
-                    <a asp-action="delete" asp-controller="Kindergarten" asp-route-id="@Kindergarten.Id" class="btn btn-outline-danger">Delete</a>
-                </td>
-            </tr>
-            rowNumber += 1;
-        }
+            @foreach (var kg in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+                    <td>@kg.GroupName</td>
+                    <td>@kg.ChildrenCount</td>
+                    <td>@kg.KindergartenName</td>
+                    <td>@kg.TeacherName</td>
+                    <td>@kg.CreatedAt.ToString("yyyy-MM-dd")</td>
+                    <td>@kg.UpdatedAt.ToString("yyyy-MM-dd")</td>
+                    <td>
+                        <a asp-action="Details" asp-controller="Kindergarten" asp-route-id="@kg.Id" class="btn btn-primary">Details</a>
+                        <a asp-action="Update" asp-controller="Kindergarten" asp-route-id="@kg.Id" class="btn btn-primary">Update</a>
+                        <a asp-action="Delete" asp-controller="Kindergarten" asp-route-id="@kg.Id" class="btn btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+                rowNumber++;
+            }
         </tbody>
     </table>
 </form>

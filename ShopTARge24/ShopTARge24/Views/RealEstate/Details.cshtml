@@ -1,0 +1,74 @@
+﻿@model ShopTARge24.Models.RealEstate.RealEstateDetailsViewModel
+
+<h1>Property Details</h1>
+
+<div>
+    <h4>Property</h4>
+    <hr />
+
+    <dl class="row">
+        <div class="form-group row">
+            <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @Html.DisplayFor(model => model.Id)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Area" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @Html.DisplayFor(model => model.Area)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="Location" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @Html.DisplayFor(model => model.Location)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="RoomNumber" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @Html.DisplayFor(model => model.RoomNumber)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="BuildingType" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @Html.DisplayFor(model => model.BuildingType)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="CreatedAt" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @Html.DisplayFor(model => model.CreatedAt)
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label asp-for="ModifiedAt" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                @Html.DisplayFor(model => model.ModifiedAt)
+            </div>
+        </div>
+    </dl>
+
+    <dl>
+        @foreach (var images in Model.Images)
+        {
+            <partial name="_Images" model="images" />
+        }
+    </dl>
+
+    <hr />
+    <a asp-action="Index" asp-controller="RealEstate" class="btn btn-secondary">Back</a>
+
+    <form asp-action="DeleteConfirmation" method="post" class="d-inline">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+    </form>
+</div>

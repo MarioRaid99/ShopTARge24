@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Xml;
 using ShopTARge24.Core.Domain;
 using ShopTARge24.Core.Dto;
 
@@ -10,6 +6,9 @@ namespace ShopTARge24.Core.ServiceInterface
 {
     public interface IFileServices
     {
-        void KindergartenUploadFilesToDatabase(KindergartenDto dto, Kindergarten domain);
+        void FilesToApi(SpaceshipDto dto, Spaceships spaceships);
+        Task<FileToApi> RemoveImageFromApi(FileApiDto dto);
+        //Task<List<FileToApi>> RemoveImagesFromApi(FileApiDto[] dtos);
+        void UploadFilesToDatabase(RealEstateDto dto, RealEstate domain);
     }
 }

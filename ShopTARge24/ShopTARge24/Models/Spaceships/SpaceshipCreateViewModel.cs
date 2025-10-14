@@ -1,4 +1,6 @@
-﻿namespace ShopTARge24.Models.Spaceships
+﻿using ShopTARge24.Views.Spaceships;
+
+namespace ShopTARge24.Models.Spaceships
 {
     public class SpaceshipCreateUpdateViewModel
     {
@@ -11,5 +13,8 @@
 
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
+        public List<IFormFile> Files { get; internal set; }
+        public List<ImageViewModel> Image { get; set; }
+           = new List<ImageViewModel>();
     }
 }

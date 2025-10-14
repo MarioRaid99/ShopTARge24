@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ShopTARge24.Core.Dto
 {
-    public class KindergartenFileToDatabaseDto
+    public class FileApiDto
     {
+        public string? ExistingFilePath;
+
         public Guid Id { get; set; }
-        public string? ImageTitle { get; set; }
-        public byte[]? ImageData { get; set; }
-        public Guid? KindergartenId { get; set; }
+        public string? ExistingFilepath { get; set; }
+        public Guid? SpaceshipId { get; set; }
     }
 }
