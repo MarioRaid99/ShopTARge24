@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShopTARge24.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class overhaul_full_fix : Migration
+    public partial class new_mew : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

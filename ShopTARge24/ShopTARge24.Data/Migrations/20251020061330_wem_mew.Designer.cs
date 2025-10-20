@@ -12,8 +12,8 @@ using ShopTARge24.Data;
 namespace ShopTARge24.Data.Migrations
 {
     [DbContext(typeof(ShopTARge24Context))]
-    [Migration("20251014154602_overhaul_full_fix")]
-    partial class overhaul_full_fix
+    [Migration("20251020061330_wem_mew")]
+    partial class wem_mew
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
