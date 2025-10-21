@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
 builder.Services.AddScoped<IKindergartenService, KindergartenService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
 
 builder.Services.AddScoped<IFileServices, FileServices>();
 

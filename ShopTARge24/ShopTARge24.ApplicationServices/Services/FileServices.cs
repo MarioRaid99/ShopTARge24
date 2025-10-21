@@ -63,8 +63,8 @@ namespace ShopTARge24.ApplicationServices.Services
         }
 
 
-        }
-        public async Task<FileToApi> RemoveImageFromApi(FileApiDto dto)
+        
+        public async Task<FileToApi> RemoveImageFromApi(FileToApiDto dto)
         {
             //kui soovin kustutada, siis pean l'bi Id pildi ülesse otsima
             var imageId = await _context.FileToApis

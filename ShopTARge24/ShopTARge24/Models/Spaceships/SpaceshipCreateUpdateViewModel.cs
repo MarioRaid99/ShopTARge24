@@ -10,15 +10,11 @@ namespace ShopTARge24.Models.Spaceships
         public DateTime? BuiltDate { get; set; }
         public int? Crew { get; set; }
         public int? EnginePower { get; set; }
-
         public List<IFormFile> Files { get; set; }
         public List<ImageViewModel> Image { get; set; }
             = new List<ImageViewModel>();
-
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-        public List<IFormFile> Files { get; internal set; }
-        public List<ImageViewModel> Image { get; set; }
-           = new List<ImageViewModel>();
+
     }
 }

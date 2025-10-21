@@ -11,8 +11,8 @@ namespace ShopTARge24.Core.Dto
         public int? Crew { get; set; }
         public int? EnginePower { get; set; }
         public List<IFormFile> Files { get; set; }
-        public IEnumerable<FileApiDto> FileToApiDtos { get; set; }
-        = new List<FileApiDto>();
+        public IEnumerable<FileToApiDto> FileToApiDtos { get; set; }
+        = new List<FileToApiDto>();
         public DateTime? CreatedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
     }

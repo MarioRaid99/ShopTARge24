@@ -5,7 +5,7 @@
 namespace ShopTARge24.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class new_migration : Migration
+    public partial class AccuWeather : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
