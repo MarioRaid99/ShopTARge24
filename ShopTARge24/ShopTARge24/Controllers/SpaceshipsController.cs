@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopTARge24.Core.Domain;
 using ShopTARge24.Core.Dto;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Data;
@@ -19,8 +18,7 @@ namespace ShopTARge24.Controllers
             (
                 ShopTARge24Context context,
                 ISpaceshipServices spaceshipServices,
-                IFileServices fileServices
-            )
+                IFileServices fileServices)
         {
             _context = context;
             _spaceshipServices = spaceshipServices;
@@ -67,12 +65,12 @@ namespace ShopTARge24.Controllers
                 ModifiedAt = vm.ModifiedAt,
                 Files = vm.Files,
                 FileToApiDtos = vm.Image
-                    .Select(x => new FileToApiDto
-                    {
-                        Id = x.ImageId,
-                        ExistingFilePath = x.Filepath,
-                        SpaceshipId = x.SpaceshipId
-                    }).ToArray()
+                .Select(x => new FileApiDto
+                {
+                    Id = x.ImageId,
+                    ExistingFilepath = x.Filepath,
+                    SpaceshipId = x.SpaceshipId
+                }).ToArray()
             };
 
             var result = await _spaceshipServices.Create(dto);
@@ -96,12 +94,12 @@ namespace ShopTARge24.Controllers
             }
 
             var images = await _context.FileToApis
-                .Where(x => x.SpaceshipId == id)
-                .Select(y => new ImageViewModel
-                {
-                    Filepath = y.ExistingFilePath,
-                    ImageId = y.Id
-                }).ToArrayAsync();
+               .Where(x => x.SpaceshipId == id)
+               .Select(y => new ImageViewModel
+               {
+                   Filepath = y.ExistingFilePath,
+                   ImageId = y.Id
+               }).ToArrayAsync();
 
             var vm = new SpaceshipCreateUpdateViewModel();
 
@@ -133,11 +131,12 @@ namespace ShopTARge24.Controllers
                 ModifiedAt = vm.ModifiedAt,
                 Files = vm.Files,
                 FileToApiDtos = vm.Image
-                    .Select(x => new FileToApiDto
+                    .Select(x => new FileApiDto
                     {
                         Id = x.ImageId,
                         ExistingFilePath = x.Filepath,
                         SpaceshipId = x.SpaceshipId
+
                     }).ToArray()
             };
 
@@ -209,6 +208,7 @@ namespace ShopTARge24.Controllers
                 return NotFound();
             }
 
+            //toimub viewModeliga mappimine
             var images = await _context.FileToApis
                 .Where(x => x.SpaceshipId == id)
                 .Select(y => new ImageViewModel
@@ -216,7 +216,6 @@ namespace ShopTARge24.Controllers
                     Filepath = y.ExistingFilePath,
                     ImageId = y.Id
                 }).ToArrayAsync();
-
 
             var vm = new SpaceshipDetailsViewModel();
 

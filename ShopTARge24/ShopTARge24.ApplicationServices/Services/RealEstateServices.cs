@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Xml;
+using Microsoft.EntityFrameworkCore;
 using ShopTARge24.Core.Domain;
 using ShopTARge24.Core.Dto;
 using ShopTARge24.Core.ServiceInterface;
@@ -26,13 +27,16 @@ namespace ShopTARge24.ApplicationServices.Services
         {
             RealEstate domain = new RealEstate();
 
-            domain.Id = dto.Id;
+            domain.Id = Guid.NewGuid(); //Guid.NewGuid()
             domain.Area = dto.Area;
             domain.Location = dto.Location;
             domain.RoomNumber = dto.RoomNumber;
             domain.BuildingType = dto.BuildingType;
             domain.CreatedAt = DateTime.Now;
             domain.ModifiedAt = DateTime.Now;
+
+            await _context.RealEstates.AddAsync(domain);
+            await _context.SaveChangesAsync();
 
             if (dto.Files != null)
             {

@@ -1,0 +1,23 @@
+﻿@model ShopTARge24.Models.Kindergartens.KindergartenImageViewModel
+
+<div class="form-group row col-sm-4 offset-2 mb-3">
+    <!-- Title + Delete button on same row -->
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <div class="fw-bold">@Model.ImageTitle</div>
+
+        @if (ViewContext.RouteData.Values["action"]?.ToString() == "Delete")
+        {
+            <form asp-action="DeleteFile" asp-route-fileId="@Model.Id" method="post"
+                  onsubmit="return confirm('Are you sure you want to delete this image?');"
+                  class="mb-0">
+                <button type="submit"
+                        class="btn btn-danger btn-sm rounded-pill px-3 d-flex align-items-center gap-1"
+                        title="Delete this image">
+                    <i class="bi bi-trash3-fill"></i>
+                    Delete
+                </button>
+            </form>
+        }
+    </div>
+    <img class="card-img-top rounded" src="@Model.Image" asp-append-version="true" alt="@Model.ImageTitle" />
+</div>
