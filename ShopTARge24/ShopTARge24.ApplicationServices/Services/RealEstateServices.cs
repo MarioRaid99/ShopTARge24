@@ -5,6 +5,7 @@ using ShopTARge24.Core.Dto;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Data;
 
+
 namespace ShopTARge24.ApplicationServices.Services
 {
     public class RealEstateServices : IRealEstateServices
@@ -41,6 +42,9 @@ namespace ShopTARge24.ApplicationServices.Services
             {
                 _fileServices.UploadFilesToDatabase(dto, domain);
             }
+
+            await _context.RealEstates.AddAsync(domain);
+            await _context.SaveChangesAsync();
 
             return domain;
         }

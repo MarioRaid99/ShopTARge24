@@ -1,14 +1,10 @@
-﻿namespace ShopTARge24.Models.RealEstate
+﻿namespace ShopTARge24.Core.Dto
 {
-    public class RealEstateImageViewModel
+    public class FileToDatabaseDto
     {
         public Guid Id { get; set; }
         public string? ImageTitle { get; set; }
-
         public byte[]? ImageData { get; set; }
-
-        public string? Image { get; set; }
-
         public Guid? RealEstateId { get; set; }
     }
 }

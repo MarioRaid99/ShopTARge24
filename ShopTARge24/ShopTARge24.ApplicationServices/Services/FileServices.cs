@@ -6,6 +6,7 @@ using ShopTARge24.Core.Dto;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Data;
 
+
 namespace ShopTARge24.ApplicationServices.Services
 {
     public class FileServices : IFileServices
@@ -52,12 +53,14 @@ namespace ShopTARge24.ApplicationServices.Services
                             ExistingFilePath = uniqueFileName,
                             SpaceshipId = domain.Id
                         };
+
                         _context.FileToApis.AddAsync(path);
 
                     }
 
                 }
             }
+        }
 
 
         }

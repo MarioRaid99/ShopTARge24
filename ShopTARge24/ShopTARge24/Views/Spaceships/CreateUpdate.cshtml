@@ -1,4 +1,4 @@
-@model ShopTARge24.Models.Spaceships.SpaceshipCreateUpdateViewModel
+﻿@model ShopTARge24.Models.Spaceships.SpaceshipCreateUpdateViewModel
 
 @if (Model.Id.HasValue)
 {
@@ -68,11 +68,11 @@ else
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="update" asp-controller="spaceships" type="submit" class="btn btn-success" value="Update" />
+        <input asp-action="update" asp-controller="spaceships" type="submit" class="btn btn-success" value="Update" />
         }
         else
         {
-            <input asp-action="create" asp-controller="spaceships" type="submit" class="btn btn-success" value="Create" />
+        <input asp-action="create" asp-controller="spaceships" type="submit" class="btn btn-success" value="Create" />
         }
 
         <a asp-action="Index" asp-controller="spaceships" class="btn btn-success">Back</a>
