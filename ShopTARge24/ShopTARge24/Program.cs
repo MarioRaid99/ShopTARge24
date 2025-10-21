@@ -4,14 +4,18 @@ using ShopTARge24.ApplicationServices.Services;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Data;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
+builder.Services.AddScoped<IKindergartenService, KindergartenService>();
+builder.Services.AddScoped<IFileService, FileService>();
+
 builder.Services.AddScoped<IFileServices, FileServices>();
+
+// register real estate service
 builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
 
 builder.Services.AddDbContext<ShopTARge24Context>(options =>
