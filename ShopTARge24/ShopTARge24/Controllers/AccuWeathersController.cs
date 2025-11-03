@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARge24.Core.Dto;
+using ShopTARge24.Core.Dto.AccuWeather;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Models.AccuWeathers;
 
@@ -40,8 +41,8 @@ namespace ShopTARge24.Controllers
             AccuLocationWeatherResultDto dto = new();
             dto.CityName = city;
 
-            _weatherForecastServices.AccuWeatherResult(dto);
-            //_weatherForecastServices.AccuWeatherResultWebClient(dto);
+            //_weatherForecastServices.AccuWeatherResult(dto);
+            _weatherForecastServices.AccuWeatherResultWebClient(dto);
             AccuWeatherViewModel vm = new();
             //vm.CityName = dto.CityName;
             vm.EffectiveDate = dto.EffectiveDate;
