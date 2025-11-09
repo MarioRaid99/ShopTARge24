@@ -9,7 +9,7 @@ namespace ShopTARge24.ApplicationServices.Services
     {
         public async Task<OpenWeatherDto> OpenWeatherResult(OpenWeatherDto dto)
         {
-            string apiKey = "8b63afae731d1d1914ddf7d30c6d4be9";
+            string apiKey = "a5ff179e13420806f083ec6730e09a67";
 
             // get coordinates
             string geoUrl = $"http://api.openweathermap.org/geo/1.0/direct?q={dto.CityName}&appid={apiKey}";
