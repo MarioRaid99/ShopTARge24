@@ -1,0 +1,41 @@
+﻿@model ShopTARge24.Models.OpenWeather.OpenWeatherViewModel
+
+<div class="container mt-4">
+    <h2>Forecast for the selected city: @Model.CityName</h2>
+    <hr />
+
+    <dl class="row text-dark">
+        <div>
+            <dt class="col-sm-2">Temperature:</dt>
+            <dd class="col-sm-10">@Model.Temperature °C</dd>
+        </div>
+
+        <div>
+            <dt class="col-sm-2">Feels like:</dt>
+            <dd class="col-sm-10">@Model.FeelsLike °C</dd>
+        </div>
+
+        <div>
+            <dt class="col-sm-2">Humidity:</dt>
+            <dd class="col-sm-10">@Model.Humidity %</dd>
+        </div>
+
+        <div>
+            <dt class="col-sm-2">Pressure:</dt>
+            <dd class="col-sm-10">@Model.Pressure hPa</dd>
+        </div>
+
+        <div>
+            <dt class="col-sm-2">Wind speed:</dt>
+            <dd class="col-sm-10">@Model.WindSpeed m/s</dd>
+        </div>
+
+        <div>
+            <dt class="col-sm-2">Weather condition:</dt>
+            <dd class="col-sm-10">@Model.WeatherMain (@Model.WeatherDescription)</dd>
+        </div>
+    </dl>
+
+    <a asp-action="Index" asp-controller="OpenWeather" class="btn btn-success mt-3">Return</a>
+
+</div>
