@@ -27,16 +27,13 @@ namespace ShopTARge24.ApplicationServices.Services
         {
             RealEstate domain = new RealEstate();
 
-            domain.Id = Guid.NewGuid(); //Guid.NewGuid()
+            domain.Id = Guid.NewGuid();
             domain.Area = dto.Area;
             domain.Location = dto.Location;
             domain.RoomNumber = dto.RoomNumber;
             domain.BuildingType = dto.BuildingType;
             domain.CreatedAt = DateTime.Now;
             domain.ModifiedAt = DateTime.Now;
-
-            await _context.RealEstates.AddAsync(domain);
-            await _context.SaveChangesAsync();
 
             if (dto.Files != null)
             {
