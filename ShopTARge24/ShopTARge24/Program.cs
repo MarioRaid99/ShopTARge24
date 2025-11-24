@@ -14,7 +14,8 @@ builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
 builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
 builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
-
+builder.Services.AddScoped<IKindergartenService, KindergartenService>();
+builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddHttpClient<IChuckNorrisServices, ChuckNorrisServices>();
 builder.Services.AddHttpClient<ICocktailServices, CocktailServices>();
 
