@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopTARge24.ApplicationServices.Services;
 using ShopTARge24.Core.Dto;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Data;
-using ShopTARge24.Models.Kindergartens;
 using ShopTARge24.Models.RealEstate;
-using ShopTARge24.Models.Spaceships;
 
 
 namespace ShopTARge24.Controllers
@@ -17,9 +13,11 @@ namespace ShopTARge24.Controllers
         private readonly ShopTARge24Context _context;
         private readonly IRealEstateServices _realEstateServices;
 
-        public RealEstateController(
+        public RealEstateController
+            (
                 ShopTARge24Context context,
-            IRealEstateServices realEstateServices)
+                IRealEstateServices realEstateServices
+            )
         {
             _context = context;
             _realEstateServices = realEstateServices;
@@ -32,9 +30,8 @@ namespace ShopTARge24.Controllers
                 {
                     Id = x.Id,
                     Area = x.Area,
-                     Location = x.Location,
+                    BuildingType = x.BuildingType,
                     RoomNumber = x.RoomNumber,
-                     BuildingType = x.BuildingType,
                 });
 
             return View(result);
@@ -51,6 +48,11 @@ namespace ShopTARge24.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(RealEstateCreateUpdateViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("CreateUpdate", vm);
+            }
+
             var dto = new RealEstateDto()
             {
                 Id = vm.Id,
@@ -58,11 +60,10 @@ namespace ShopTARge24.Controllers
                 BuildingType = vm.BuildingType,
                 RoomNumber = vm.RoomNumber,
                 Location = vm.Location,
-                CreatedAt = vm.CreatedAt ?? DateTime.UtcNow,
-                ModifiedAt = vm.ModifiedAt ?? DateTime.UtcNow,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt,
                 Files = vm.Files,
                 Image = vm.Image
-
                     .Select(x => new FileToDatabaseDto
                     {
                         Id = x.Id,
@@ -89,10 +90,11 @@ namespace ShopTARge24.Controllers
 
             if (realEstate == null)
             {
-                return NotFound();
+                return View("NotFound", id);
             }
 
             RealEstateImageViewModel[] images = await FileFromDatabase(id);
+
 
             var vm = new RealEstateCreateUpdateViewModel();
 
@@ -111,15 +113,20 @@ namespace ShopTARge24.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(RealEstateCreateUpdateViewModel vm)
         {
+            if (!ModelState.IsValid)
+            {
+                return View("CreateUpdate", vm);
+            }
+
             var dto = new RealEstateDto()
             {
                 Id = vm.Id,
                 Area = vm.Area,
-                Location = vm.Location,
-                RoomNumber = vm.RoomNumber,
                 BuildingType = vm.BuildingType,
+                RoomNumber = vm.RoomNumber,
+                Location = vm.Location,
                 CreatedAt = vm.CreatedAt,
-                ModifiedAt = DateTime.UtcNow
+                ModifiedAt = vm.ModifiedAt,
             };
 
             var result = await _realEstateServices.Update(dto);
@@ -139,7 +146,7 @@ namespace ShopTARge24.Controllers
 
             if (realEstate == null)
             {
-                return NotFound();
+                return View("NotFound", id);
             }
 
             RealEstateImageViewModel[] images = await FileFromDatabase(id);
@@ -161,9 +168,9 @@ namespace ShopTARge24.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
-            var deleted = await _realEstateServices.Delete(id);
+            var realEstate = await _realEstateServices.Delete(id);
 
-            if (deleted == null)
+            if (realEstate == null)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -179,7 +186,7 @@ namespace ShopTARge24.Controllers
 
             if (realEstate == null)
             {
-                return NotFound();
+                return View("NotFound", id);
             }
 
             RealEstateImageViewModel[] images = await FileFromDatabase(id);
@@ -201,7 +208,6 @@ namespace ShopTARge24.Controllers
         private async Task<RealEstateImageViewModel[]> FileFromDatabase(Guid id)
         {
             return await _context.FileToDatabases
-
                 .Where(x => x.RealEstateId == id)
                 .Select(y => new RealEstateImageViewModel
                 {
@@ -210,11 +216,7 @@ namespace ShopTARge24.Controllers
                     ImageData = y.ImageData,
                     ImageTitle = y.ImageTitle,
                     Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
-
-
                 }).ToArrayAsync();
         }
-
-
     }
 }
