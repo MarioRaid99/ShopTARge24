@@ -65,10 +65,10 @@ namespace ShopTARge24.Controllers
                 ModifiedAt = vm.ModifiedAt,
                 Files = vm.Files,
                 FileToApiDtos = vm.Image
-                .Select(x => new FileApiDto
+                .Select(x => new FileToApiDto
                 {
                     Id = x.ImageId,
-                    ExistingFilepath = x.Filepath,
+                    ExistingFilePath = x.Filepath,
                     SpaceshipId = x.SpaceshipId
                 }).ToArray()
             };
@@ -131,7 +131,7 @@ namespace ShopTARge24.Controllers
                 ModifiedAt = vm.ModifiedAt,
                 Files = vm.Files,
                 FileToApiDtos = vm.Image
-                    .Select(x => new FileApiDto
+                    .Select(x => new FileToApiDto
                     {
                         Id = x.ImageId,
                         ExistingFilePath = x.Filepath,

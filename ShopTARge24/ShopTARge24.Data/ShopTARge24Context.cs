@@ -3,6 +3,7 @@ using ShopTARge24.Core.Domain;
 using ShopTARge24.Core.ServiceInterface;
 
 
+
 namespace ShopTARge24.Data
 {
     public class ShopTARge24Context : DbContext

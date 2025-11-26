@@ -58,8 +58,6 @@ namespace ShopTARge24.Controllers
                 BuildingType = vm.BuildingType,
                 RoomNumber = vm.RoomNumber,
                 Location = vm.Location,
-                RoomNumber = vm.RoomNumber,
-                BuildingType = vm.BuildingType,
                 CreatedAt = vm.CreatedAt ?? DateTime.UtcNow,
                 ModifiedAt = vm.ModifiedAt ?? DateTime.UtcNow,
                 Files = vm.Files,
