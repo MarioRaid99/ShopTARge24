@@ -51,6 +51,7 @@ public class Program
            .WithStaticAssets();
         app.MapHub<UserHub>("/hubs/userCount");
         app.MapHub<DeathlyHallowsHub>("hubs/deathyhallows");
+        app.MapHub<BasicChatHub>("/hubs/basicchat");
 
         app.Run();
     }
