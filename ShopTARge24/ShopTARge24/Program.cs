@@ -1,14 +1,19 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Options;
 using ShopTARge24.ApplicationServices.Services;
+using ShopTARge24.Core.Domain;
 using ShopTARge24.Core.ServiceInterface;
 using ShopTARge24.Data;
+using ShopTARge24.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 
 builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
 builder.Services.AddScoped<IFileServices, FileServices>();
@@ -24,6 +29,15 @@ builder.Services.AddHttpClient<ICocktailServices, CocktailServices>();
 
 builder.Services.AddDbContext<ShopTARge24Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequiredLength = 3;
+})
+    .AddEntityFrameworkStores<ShopTARge24Context>()
+    .AddDefaultTokenProviders()
+    .AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>("CustomEmailConfirmation");
+
 
 var app = builder.Build();
 
@@ -48,6 +62,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
+app.MapHub<ChatHub>("/chatHub");
 
 app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
